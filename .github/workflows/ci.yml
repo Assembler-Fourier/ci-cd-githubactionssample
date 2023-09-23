@@ -24,10 +24,10 @@ jobs:
 
       - name: Perform Arithmetic Operations
         run: |
-          echo "::set-env name=SUM::$(echo "10 + 5" | bc)"
-          echo "::set-env name=DIFFERENCE::$(echo "10 - 5" | bc)"
-          echo "::set-env name=PRODUCT::$(echo "10 * 5" | bc)"
-          echo "::set-env name=QUOTIENT::$(echo "10 / 5" | bc)"
+          echo "SUM=$(echo '10 + 5' | bc)" >> $GITHUB_ENV
+          echo "DIFFERENCE=$(echo '10 - 5' | bc)" >> $GITHUB_ENV
+          echo "PRODUCT=$(echo '10 * 5' | bc)" >> $GITHUB_ENV
+          echo "QUOTIENT=$(echo '10 / 5' | bc)" >> $GITHUB_ENV
 
       - name: Display Results
         run: |
