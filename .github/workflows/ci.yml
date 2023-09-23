@@ -1,0 +1,45 @@
+name: Complex Arithmetic Operations
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      - name: Perform Arithmetic Operations
+        run: |
+          sum=$(echo "10 + 5" | bc)
+          difference=$(echo "10 - 5" | bc)
+          product=$(echo "10 * 5" | bc)
+          quotient=$(echo "10 / 5" | bc)
+
+          echo "Sum: $sum"
+          echo "Difference: $difference"
+          echo "Product: $product"
+          echo "Quotient: $quotient"
+
+      - name: Save Results to File
+        run: |
+          echo "Sum: $sum" > results.txt
+          echo "Difference: $difference" >> results.txt
+          echo "Product: $product" >> results.txt
+          echo "Quotient: $quotient" >> results.txt
+
+      - name: Display Results
+        run: cat results.txt
