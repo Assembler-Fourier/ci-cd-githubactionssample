@@ -24,22 +24,14 @@ jobs:
 
       - name: Perform Arithmetic Operations
         run: |
-          sum=$(echo "10 + 5" | bc)
-          difference=$(echo "10 - 5" | bc)
-          product=$(echo "10 * 5" | bc)
-          quotient=$(echo "10 / 5" | bc)
-
-          echo "Sum: $sum"
-          echo "Difference: $difference"
-          echo "Product: $product"
-          echo "Quotient: $quotient"
-
-      - name: Save Results to File
-        run: |
-          echo "Sum: $sum" > results.txt
-          echo "Difference: $difference" >> results.txt
-          echo "Product: $product" >> results.txt
-          echo "Quotient: $quotient" >> results.txt
+          echo "::set-env name=SUM::$(echo "10 + 5" | bc)"
+          echo "::set-env name=DIFFERENCE::$(echo "10 - 5" | bc)"
+          echo "::set-env name=PRODUCT::$(echo "10 * 5" | bc)"
+          echo "::set-env name=QUOTIENT::$(echo "10 / 5" | bc)"
 
       - name: Display Results
-        run: cat results.txt
+        run: |
+          echo "Sum: ${{ env.SUM }}"
+          echo "Difference: ${{ env.DIFFERENCE }}"
+          echo "Product: ${{ env.PRODUCT }}"
+          echo "Quotient: ${{ env.QUOTIENT }}"
